@@ -59,7 +59,8 @@ public class AbpFrameworkDemoDomainModule : AbpModule
 
         Configure<AbpMultiTenancyOptions>(options =>
         {
-            options.IsEnabled = MultiTenancyConsts.IsEnabled;
+            //options.IsEnabled = MultiTenancyConsts.IsEnabled;
+            options.IsEnabled = false;
         });
 
 #if DEBUG

@@ -21,13 +21,22 @@ function configureRoutes(routes: RoutesService) {
         iconClass: 'fas fa-book',
         order: 2,
         layout: eLayoutType.application,
+        requiredPolicy: 'AbpFrameworkDemo.Books'
       },
       {
         path: '/books',
         name: '::Menu:Books',
         parentName: '::Menu:BookStore',
         layout: eLayoutType.application,
+        requiredPolicy: 'AbpFrameworkDemo.Books'
       },
+      {
+        path: '/authors',
+        name: '::Menu:Authors',
+        parentName: '::Menu:BookStore',
+        layout: eLayoutType.application,
+        requiredPolicy: 'AbpFrameworkDemo.Authors',
+      }      
     ]);
   };
 }

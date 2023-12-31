@@ -99,7 +99,12 @@ public class AbpFrameworkDemoAuthServerModule : AbpModule
                 );
         });
 
-        Configure<AbpBundlingOptions>(options =>
+		Configure<OpenIddictServerAspNetCoreBuilder>(options =>
+		{
+			options.DisableTransportSecurityRequirement();
+		});
+
+		Configure<AbpBundlingOptions>(options =>
         {
             options.StyleBundles.Configure(
                 LeptonXLiteThemeBundles.Styles.Global,

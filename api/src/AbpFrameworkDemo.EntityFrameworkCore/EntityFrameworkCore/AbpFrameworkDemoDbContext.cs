@@ -1,5 +1,7 @@
 ﻿using AbpFrameworkDemo.Domain;
+using AbpFrameworkDemo.Domain.Authors;
 using AbpFrameworkDemo.Domain.Books;
+using AbpFrameworkDemo.Domain.Shared.Authors;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -31,6 +33,7 @@ public class AbpFrameworkDemoDbContext :
 	#region Entities from Aggregate Roots
 
 	public DbSet<Book> Books { get; set; }
+	public DbSet<Author> Authors { get; set; }
 
 	#endregion
 
@@ -83,16 +86,35 @@ public class AbpFrameworkDemoDbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
-		/* Configure your own tables/entities inside here */
-		#region Entity Configurations
+        /* Configure your own tables/entities inside here */
+        #region Entity Configurations
 
-		builder.Entity<Book>(b =>
-		{
-			b.ToTable(AbpFrameworkDemoConsts.DbTablePrefix + "Books",
-				AbpFrameworkDemoConsts.DbSchema);
-			b.ConfigureByConvention(); //auto configure for the base class props
-			b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        builder.Entity<Book>(b =>
+        {
+            b.ToTable(AbpFrameworkDemoConsts.DbTablePrefix + "Books",
+                AbpFrameworkDemoConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+
+			b.HasOne<Author>().WithMany().HasForeignKey(x => x.AuthorId).IsRequired();
 		});
+
+		builder.Entity<Author>(b =>
+		{
+			b.ToTable(AbpFrameworkDemoConsts.DbTablePrefix + "Authors",
+				AbpFrameworkDemoConsts.DbSchema);
+
+			b.ConfigureByConvention();
+
+			b.Property(x => x.Name)
+				.IsRequired()
+				.HasMaxLength(AuthorConsts.MaxNameLength);
+
+            
+			b.HasIndex(x => x.Name);
+
+		});
+
 
 		#endregion
 

@@ -1,4 +1,6 @@
-﻿using AbpFrameworkDemo.Application.Contracts.Books;
+﻿using AbpFrameworkDemo.Application.Contracts.Authors;
+using AbpFrameworkDemo.Application.Contracts.Books;
+using AbpFrameworkDemo.Domain.Authors;
 using AbpFrameworkDemo.Domain.Books;
 using AutoMapper;
 
@@ -14,5 +16,10 @@ public class AbpFrameworkDemoApplicationAutoMapperProfile : Profile
 
         CreateMap<Book, BookDTO>();
         CreateMap<CreateUpdateBookDTO, Book>();
-    }
+
+		CreateMap<Author, AuthorDTO>();
+		CreateMap<Author, AuthorLookupDTO>();
+
+
+	}
 }

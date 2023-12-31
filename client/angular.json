@@ -147,10 +147,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "AbpFrameworkDemo:build:production"
+              "buildTarget": "AbpFrameworkDemo:build:production"
             },
             "development": {
-              "browserTarget": "AbpFrameworkDemo:build:development"
+              "buildTarget": "AbpFrameworkDemo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -158,7 +158,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AbpFrameworkDemo:build"
+            "buildTarget": "AbpFrameworkDemo:build"
           }
         },
         "test": {
